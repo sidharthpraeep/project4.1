@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecomshoe
+data:
+  NODE_ENV: "production"
+  PRODUCT_PORT: "3009"
+  USER_PORT: "3001"
+  ORDER_PORT: "3002"
+  DB_HOST: "mysql-service"
+  LOG_LEVEL: "info"

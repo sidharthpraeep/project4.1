@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sidharth Shoe Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red-900: #501313;
+    --red-800: #791F1F;
+    --red-700: #A32D2D;
+    --red-600: #A32D2D;
+    --red-500: #E24B4A;
+    --red-400: #F09595;
+    --red-100: #F7C1C1;
+    --red-50: #FCEBEB;
+    --dark: #0e0e0e;
+    --dark-2: #1a1a1a;
+    --dark-3: #252525;
+    --gray: #888;
+    --light: #f5f5f0;
+    --white: #fff;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(14,14,14,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(226,75,74,0.15);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+  .nav-logo span { color: var(--red-500); }
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none; color: #aaa;
+    font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--red-500); }
+  .nav-actions { display: flex; align-items: center; gap: 1.2rem; }
+  .nav-cart {
+    background: var(--red-700);
+    color: white;
+    border: none; border-radius: 100px;
+    padding: 0.55rem 1.4rem;
+    font-family: var(--font-body);
+    font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cart:hover { background: var(--red-500); transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -100px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(162,45,45,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-text { position: relative; z-index: 2; }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(226,75,74,0.15);
+    border: 1px solid rgba(226,75,74,0.3);
+    color: var(--red-400);
+    font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+    padding: 0.4rem 1rem; border-radius: 100px;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 8vw, 7.5rem);
+    line-height: 0.95;
+    letter-spacing: 3px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 .accent { color: var(--red-500); }
+  .hero p {
+    color: #999; font-size: 1.05rem; line-height: 1.7;
+    max-width: 420px; margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-btns { display: flex; gap: 1rem; align-items: center; }
+  .btn-primary {
+    background: var(--red-700);
+    color: white; border: none;
+    padding: 0.9rem 2.2rem; border-radius: 100px;
+    font-family: var(--font-body); font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--red-500); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: #ccc; border: 1px solid #444;
+    padding: 0.9rem 2.2rem; border-radius: 100px;
+    font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--red-500); color: white; }
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
+  }
+  .hero-shoe-wrap {
+    position: relative;
+    width: 520px; height: 440px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-circle {
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, rgba(162,45,45,0.25), transparent 70%);
+    border: 1px solid rgba(226,75,74,0.12);
+  }
+  .hero-shoe-svg { position: relative; z-index: 2; width: 460px; }
+  .hero-badge {
+    position: absolute; top: 60px; right: -10px;
+    background: var(--red-700); color: white;
+    padding: 1rem; border-radius: 50%;
+    width: 80px; height: 80px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 1.6rem;
+    line-height: 1;
+  }
+  .hero-badge small { font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 1px; font-weight: 500; }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap {
+    overflow: hidden;
+    background: var(--red-700);
+    padding: 0.9rem 0;
+    border-top: 1px solid var(--red-600);
+    border-bottom: 1px solid var(--red-600);
+  }
+  .marquee-track {
+    display: flex; gap: 3rem;
+    animation: marquee 18s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-track span {
+    font-family: var(--font-display);
+    font-size: 1.1rem; letter-spacing: 3px;
+    color: rgba(255,255,255,0.85);
+  }
+  .marquee-track .dot { color: rgba(255,255,255,0.4); }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ─── SECTION HEADER ─── */
+  .section { padding: 6rem 4rem; }
+  .sec-label {
+    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--red-500); font-weight: 600; margin-bottom: 0.75rem;
+  }
+  .sec-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    letter-spacing: 2px; line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .sec-sub {
+    color: #777; font-size: 0.95rem; font-weight: 300;
+  }
+  .sec-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+  .sec-link { color: var(--red-400); font-size: 0.85rem; font-weight: 500; text-decoration: none; letter-spacing: 1px; }
+  .sec-link:hover { color: var(--red-500); }
+
+  /* ─── PRODUCT GRID ─── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .product-card {
+    background: var(--dark-2);
+    border: 1px solid #2a2a2a;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s, border-color 0.25s;
+    position: relative;
+  }
+  .product-card:hover { transform: translateY(-6px); border-color: rgba(226,75,74,0.35); }
+  .product-thumb {
+    height: 220px;
+    background: var(--dark-3);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-thumb svg { width: 200px; transition: transform 0.35s; }
+  .product-card:hover .product-thumb svg { transform: scale(1.06) rotate(-3deg); }
+  .product-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--red-700); color: white;
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 0.3rem 0.75rem; border-radius: 100px;
+  }
+  .product-info { padding: 1.25rem 1.25rem 1.4rem; }
+  .product-brand { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #666; margin-bottom: 0.3rem; }
+  .product-name { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.75rem; }
+  .product-footer { display: flex; align-items: center; justify-content: space-between; }
+  .product-price { font-family: var(--font-display); font-size: 1.7rem; color: var(--white); letter-spacing: 1px; }
+  .product-price sub { font-family: var(--font-body); font-size: 0.75rem; color: #888; font-weight: 400; vertical-align: middle; text-decoration: line-through; margin-right: 4px; }
+  .add-btn {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--red-700); border: none; color: white;
+    font-size: 1.4rem; font-weight: 300; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .add-btn:hover { background: var(--red-500); transform: scale(1.1); }
+
+  /* ─── CATEGORIES ─── */
+  .categories-section { background: var(--dark-2); }
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 260px 260px;
+    gap: 1rem;
+  }
+  .cat-card {
+    border-radius: 18px; overflow: hidden;
+    position: relative; cursor: pointer;
+    background: var(--dark-3);
+    display: flex; align-items: flex-end;
+    padding: 1.5rem;
+    transition: transform 0.2s;
+  }
+  .cat-card:hover { transform: scale(1.015); }
+  .cat-card:first-child { grid-row: span 2; }
+  .cat-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%);
+  }
+  .cat-content { position: relative; z-index: 2; }
+  .cat-name {
+    font-family: var(--font-display);
+    font-size: 1.8rem; letter-spacing: 2px;
+    line-height: 1;
+  }
+  .cat-count { font-size: 0.75rem; color: #aaa; margin-top: 0.2rem; }
+  .cat-bg-1 { background: linear-gradient(135deg, #3d1010 0%, #1a1a1a 100%); }
+  .cat-bg-2 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+  .cat-bg-3 { background: linear-gradient(135deg, #1a2e1a 0%, #0d1a0d 100%); }
+  .cat-bg-4 { background: linear-gradient(135deg, #2e2a1a 0%, #1a1710 100%); }
+  .cat-bg-5 { background: linear-gradient(135deg, #2e1a2a 0%, #1a0d18 100%); }
+  .cat-shoe { position: absolute; bottom: 10px; right: 10px; opacity: 0.2; }
+
+  /* ─── FEATURES ─── */
+  .features-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .feature-card {
+    background: var(--dark-2);
+    border: 1px solid #252525;
+    border-radius: 16px; padding: 1.75rem 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .feature-card:hover { border-color: rgba(226,75,74,0.25); }
+  .feature-icon {
+    width: 48px; height: 48px;
+    background: rgba(226,75,74,0.12);
+    border: 1px solid rgba(226,75,74,0.2);
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.1rem; font-size: 1.4rem;
+  }
+  .feature-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .feature-desc { color: #666; font-size: 0.85rem; line-height: 1.6; font-weight: 300; }
+
+  /* ─── PROMO BANNER ─── */
+  .promo-section { padding: 3rem 4rem; }
+  .promo-banner {
+    background: linear-gradient(135deg, var(--red-900) 0%, #7a1e1e 50%, var(--red-800) 100%);
+    border-radius: 24px; padding: 4rem;
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; gap: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .promo-banner::before {
+    content: '';
+    position: absolute; right: -80px; top: -80px;
+    width: 400px; height: 400px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .promo-banner::after {
+    content: '';
+    position: absolute; right: 60px; bottom: -120px;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+  .promo-tag {
+    font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--red-400); font-weight: 600; margin-bottom: 0.75rem;
+  }
+  .promo-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    letter-spacing: 2px; line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .promo-desc { color: rgba(255,255,255,0.65); font-size: 0.95rem; font-weight: 300; max-width: 480px; }
+  .promo-code {
+    position: relative; z-index: 2;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px; padding: 1.75rem 2.25rem;
+    text-align: center; white-space: nowrap;
+  }
+  .promo-code-label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.5rem; }
+  .promo-code-val {
+    font-family: var(--font-display);
+    font-size: 2.8rem; letter-spacing: 4px; color: white;
+  }
+  .promo-code-disc { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem; }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .testi-card {
+    background: var(--dark-2);
+    border: 1px solid #252525;
+    border-radius: 18px; padding: 1.75rem;
+    transition: border-color 0.2s;
+  }
+  .testi-card:hover { border-color: rgba(226,75,74,0.2); }
+  .testi-stars { color: var(--red-500); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .testi-text { color: #aaa; font-size: 0.9rem; line-height: 1.7; font-weight: 300; margin-bottom: 1.25rem; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 0.75rem; }
+  .testi-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 0.85rem; color: white;
+  }
+  .av-1 { background: var(--red-700); }
+  .av-2 { background: #185FA5; }
+  .av-3 { background: #3B6D11; }
+  .testi-name { font-weight: 600; font-size: 0.9rem; }
+  .testi-loc { font-size: 0.75rem; color: #666; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark-2);
+    border-top: 1px solid #222;
+    padding: 4rem 4rem 2rem;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 3rem;
+  }
+  .footer-brand { font-family: var(--font-display); font-size: 2.4rem; letter-spacing: 2px; margin-bottom: 0.75rem; }
+  .footer-brand span { color: var(--red-500); }
+  .footer-tagline { color: #555; font-size: 0.85rem; line-height: 1.7; font-weight: 300; max-width: 260px; }
+  .footer-col h4 { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: #666; margin-bottom: 1.25rem; font-weight: 600; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul a { text-decoration: none; color: #888; font-size: 0.9rem; font-weight: 300; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--red-400); }
+  .footer-bottom {
+    border-top: 1px solid #1e1e1e; padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy { font-size: 0.8rem; color: #444; }
+  .footer-socials { display: flex; gap: 0.75rem; }
+  .social-btn {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: #222; border: 1px solid #333;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 0.8rem; color: #888;
+    transition: background 0.2s, color 0.2s;
+  }
+  .social-btn:hover { background: var(--red-800); color: white; border-color: var(--red-700); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+    .hero-visual { display: none; }
+    .section { padding: 4rem 1.5rem; }
+    .sec-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .cat-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .cat-card:first-child { grid-row: span 1; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .promo-section { padding: 2rem 1.5rem; }
+    .promo-banner { grid-template-columns: 1fr; padding: 2.5rem; }
+    .footer { padding: 3rem 1.5rem 1.5rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SIDHARTH<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-cart">🛒 Cart (0)</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-tag">New Season 2026</div>
+    <h1>STEP INTO<br><span class="accent">BOLD</span><br>STYLE</h1>
+    <p>Premium footwear crafted for those who refuse to blend in. Every pair tells a story of precision and passion.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+      <button class="btn-outline">Explore Lookbook</button>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-shoe-wrap">
+      <div class="hero-circle"></div>
+      <svg class="hero-shoe-svg" viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- Main shoe body -->
+        <ellipse cx="230" cy="255" rx="195" ry="18" fill="rgba(0,0,0,0.3)"/>
+        <!-- Sole -->
+        <path d="M60 240 Q80 255 180 258 Q280 261 380 252 Q410 248 415 238 Q418 228 400 224 L80 224 Q55 228 60 240Z" fill="#1a1a1a"/>
+        <path d="M65 235 Q85 248 180 251 Q280 254 375 246 Q403 242 406 234 Q385 224 80 224 Q58 228 65 235Z" fill="#2a2a2a"/>
+        <!-- Mid sole accent -->
+        <path d="M75 228 Q180 234 375 228" stroke="#A32D2D" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <!-- Upper body -->
+        <path d="M100 225 Q95 190 105 165 Q120 135 160 125 Q200 115 240 118 Q290 122 330 130 Q360 137 375 150 Q390 163 390 180 Q390 200 385 215 L380 224 L80 224 Z" fill="#E24B4A"/>
+        <!-- Toe box -->
+        <path d="M100 225 Q95 195 100 175 Q110 150 140 138 Q165 128 190 128 Q165 145 150 165 Q135 185 130 210 L100 225Z" fill="#C93C3C"/>
+        <!-- Heel -->
+        <path d="M340 220 Q360 210 375 195 Q385 180 385 215 L380 224 L340 224Z" fill="#C93C3C"/>
+        <!-- Tongue -->
+        <path d="M220 124 Q240 120 255 124 Q260 145 255 175 Q248 195 240 210 Q232 195 228 175 Q222 148 220 124Z" fill="#D44444"/>
+        <!-- Lace loops -->
+        <circle cx="210" cy="145" r="5" fill="#791F1F"/>
+        <circle cx="250" cy="143" r="5" fill="#791F1F"/>
+        <circle cx="205" cy="162" r="5" fill="#791F1F"/>
+        <circle cx="255" cy="160" r="5" fill="#791F1F"/>
+        <circle cx="200" cy="179" r="5" fill="#791F1F"/>
+        <circle cx="258" cy="177" r="5" fill="#791F1F"/>
+        <!-- Laces -->
+        <path d="M210 145 Q230 138 250 143" stroke="white" stroke-width="2" fill="none"/>
+        <path d="M205 162 Q230 155 255 160" stroke="white" stroke-width="2" fill="none"/>
+        <path d="M200 179 Q229 172 258 177" stroke="white" stroke-width="2" fill="none"/>
+        <!-- Logo -->
+        <text x="300" y="195" font-family="'Bebas Neue', sans-serif" font-size="18" fill="rgba(255,255,255,0.35)" letter-spacing="2">S</text>
+        <!-- Swoosh accent -->
+        <path d="M120 195 Q180 175 260 185 Q310 190 350 180" stroke="rgba(255,255,255,0.2)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- Air unit -->
+        <rect x="95" y="228" width="60" height="12" rx="6" fill="#333"/>
+        <rect x="97" y="230" width="56" height="8" rx="4" fill="#3d3d3d"/>
+        <rect x="99" y="231" width="52" height="6" rx="3" fill="rgba(226,75,74,0.4)"/>
+      </svg>
+      <div class="hero-badge">NEW<br><small>2026</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack">
+    <span>SIDHARTH SHOE STORE</span><span class="dot">✦</span>
+    <span>PREMIUM FOOTWEAR</span><span class="dot">✦</span>
+    <span>NEW ARRIVALS 2026</span><span class="dot">✦</span>
+    <span>FREE SHIPPING ABOVE ₹2000</span><span class="dot">✦</span>
+    <span>AUTHENTIC QUALITY</span><span class="dot">✦</span>
+    <span>SIDHARTH SHOE STORE</span><span class="dot">✦</span>
+    <span>PREMIUM FOOTWEAR</span><span class="dot">✦</span>
+    <span>NEW ARRIVALS 2026</span><span class="dot">✦</span>
+    <span>FREE SHIPPING ABOVE ₹2000</span><span class="dot">✦</span>
+    <span>AUTHENTIC QUALITY</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+  <div class="sec-header">
+    <div>
+      <div class="sec-label">Trending Now</div>
+      <div class="sec-title">NEW ARRIVALS</div>
+      <div class="sec-sub">Fresh drops for the fearless</div>
+    </div>
+    <a href="#" class="sec-link">View All →</a>
+  </div>
+  <div class="products-grid" id="productGrid"></div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section categories-section" id="categories">
+  <div class="sec-header">
+    <div>
+      <div class="sec-label">Browse By Type</div>
+      <div class="sec-title">CATEGORIES</div>
+    </div>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card cat-bg-1">
+      <div class="cat-overlay"></div>
+      <svg class="cat-shoe" width="160" height="100" viewBox="0 0 160 100"><ellipse cx="80" cy="90" rx="70" ry="8" fill="rgba(255,255,255,0.05)"/><path d="M20 85 Q25 90 80 93 Q135 90 140 85 Q145 80 140 76 L20 76 Q15 80 20 85Z" fill="rgba(255,255,255,0.08)"/><path d="M25 76 Q22 60 30 48 Q40 35 60 32 Q80 29 95 32 Q115 36 125 48 Q132 58 130 70 L130 76 L25 76Z" fill="rgba(255,255,255,0.12)"/></svg>
+      <div class="cat-content">
+        <div class="cat-name">RUNNING</div>
+        <div class="cat-count">24 Products</div>
+      </div>
+    </div>
+    <div class="cat-card cat-bg-2">
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <div class="cat-name">CASUAL</div>
+        <div class="cat-count">18 Products</div>
+      </div>
+    </div>
+    <div class="cat-card cat-bg-3">
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <div class="cat-name">FORMAL</div>
+        <div class="cat-count">12 Products</div>
+      </div>
+    </div>
+    <div class="cat-card cat-bg-4">
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <div class="cat-name">SPORTS</div>
+        <div class="cat-count">30 Products</div>
+      </div>
+    </div>
+    <div class="cat-card cat-bg-5">
+      <div class="cat-overlay"></div>
+      <div class="cat-content">
+        <div class="cat-name">SANDALS</div>
+        <div class="cat-count">15 Products</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="sec-label">Why Choose Us</div>
+  <div class="sec-title">THE SIDHARTH PROMISE</div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🚚</div>
+      <div class="feature-title">Free Delivery</div>
+      <div class="feature-desc">Free shipping on all orders above ₹2000. Express delivery available across India.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔄</div>
+      <div class="feature-title">Easy Returns</div>
+      <div class="feature-desc">Not the right fit? Return within 30 days, no questions asked. Hassle-free process.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✅</div>
+      <div class="feature-title">100% Authentic</div>
+      <div class="feature-desc">Every pair is sourced directly from trusted brands. Authenticity guaranteed.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <div class="feature-title">Perfect Fit Guide</div>
+      <div class="feature-desc">Our size guide ensures you get the right size every single time. Chat with our experts.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO BANNER -->
+<div class="promo-section">
+  <div class="promo-banner">
+    <div>
+      <div class="promo-tag">Limited Time Offer</div>
+      <div class="promo-title">GET 20% OFF<br>YOUR FIRST ORDER</div>
+      <div class="promo-desc">Use the code below at checkout and step into premium style for less. Offer valid until stocks last.</div>
+    </div>
+    <div class="promo-code">
+      <div class="promo-code-label">Use Code</div>
+      <div class="promo-code-val">SIDHARTH20</div>
+      <div class="promo-code-disc">20% off — First order only</div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="sec-header">
+    <div>
+      <div class="sec-label">Customer Love</div>
+      <div class="sec-title">WHAT THEY SAY</div>
+    </div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Ordered a pair of running shoes and they arrived within 2 days. The quality is outstanding — these are the most comfortable shoes I've ever worn."</div>
+      <div class="testi-author">
+        <div class="testi-avatar av-1">RK</div>
+        <div>
+          <div class="testi-name">Rahul Kumar</div>
+          <div class="testi-loc">Kochi, Kerala</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Sidharth Shoe Store has an incredible collection. I love the exclusive designs — can't find these anywhere else. Will definitely be a repeat customer!"</div>
+      <div class="testi-author">
+        <div class="testi-avatar av-2">PM</div>
+        <div>
+          <div class="testi-name">Priya Menon</div>
+          <div class="testi-loc">Thrissur, Kerala</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★☆</div>
+      <div class="testi-text">"Great prices, fast shipping, and the shoes look exactly like the pictures. The packaging was also really premium. Highly recommend to everyone!"</div>
+      <div class="testi-author">
+        <div class="testi-avatar av-3">AV</div>
+        <div>
+          <div class="testi-name">Arjun Varma</div>
+          <div class="testi-loc">Kozhikode, Kerala</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">SIDHARTH<span>.</span></div>
+      <div class="footer-tagline">Where every step is a statement. Premium footwear crafted for those who live boldly.</div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Running Shoes</a></li>
+        <li><a href="#">Casual Wear</a></li>
+        <li><a href="#">Formal Shoes</a></li>
+        <li><a href="#">Sale</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Sidharth Shoe Store. All rights reserved.</div>
+    <div class="footer-socials">
+      <div class="social-btn">f</div>
+      <div class="social-btn">in</div>
+      <div class="social-btn">tw</div>
+      <div class="social-btn">ig</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const products = [
+  { name: "AeroStride Pro", brand: "Running", price: 3499, original: 4299, badge: "New", color: "#E24B4A" },
+  { name: "Urban Glide X", brand: "Casual", price: 2199, original: 2799, badge: "Sale", color: "#378ADD" },
+  { name: "ClassicEdge Formal", brand: "Formal", price: 4599, original: null, badge: "Premium", color: "#1D9E75" },
+  { name: "SportFlex Max", brand: "Sports", price: 2899, original: 3499, badge: "Hot", color: "#BA7517" },
+  { name: "CloudWalk Lite", brand: "Casual", price: 1799, original: 2299, badge: "Sale", color: "#D4537E" },
+  { name: "TrailBlaze GTX", brand: "Running", price: 5299, original: null, badge: "Exclusive", color: "#E24B4A" },
+  { name: "Executive Oxford", brand: "Formal", price: 3999, original: 4999, badge: "Sale", color: "#534AB7" },
+  { name: "Neon Sprint V2", brand: "Sports", price: 2499, original: 3099, badge: "New", color: "#E24B4A" },
+];
+
+function shoeIcon(color) {
+  return `<svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="100" cy="120" rx="85" ry="8" fill="rgba(0,0,0,0.2)"/>
+    <path d="M28 110 Q32 118 100 121 Q168 118 172 110 Q176 102 170 98 L28 98 Q22 102 28 110Z" fill="#1a1a1a"/>
+    <path d="M30 104 Q34 112 100 115 Q166 112 168 105 Q162 98 30 98 Q24 102 30 104Z" fill="#2a2a2a"/>
+    <path d="M36 102 Q100 107 168 102" stroke="${color}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M34 98 Q30 80 36 65 Q46 44 74 38 Q98 32 118 35 Q148 39 160 55 Q170 67 170 82 L168 98 L34 98Z" fill="${color}"/>
+    <path d="M34 98 Q30 82 35 68 Q42 50 60 42 Q76 35 90 36 Q72 52 62 72 Q52 88 50 98Z" fill="${color === '#E24B4A' ? '#C93C3C' : color}cc"/>
+    <path d="M148 95 Q162 86 168 74 Q170 82 168 98 L148 98Z" fill="${color === '#E24B4A' ? '#C93C3C' : color}cc"/>
+    <path d="M96 39 Q106 36 114 39 Q118 58 113 80 Q108 94 102 104 Q97 94 95 80 Q92 60 96 39Z" fill="${color}dd"/>
+    <circle cx="90" cy="58" r="3.5" fill="rgba(0,0,0,0.4)"/>
+    <circle cx="112" cy="56" r="3.5" fill="rgba(0,0,0,0.4)"/>
+    <circle cx="87" cy="72" r="3.5" fill="rgba(0,0,0,0.4)"/>
+    <circle cx="115" cy="70" r="3.5" fill="rgba(0,0,0,0.4)"/>
+    <path d="M90 58 Q101 52 112 56" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" fill="none"/>
+    <path d="M87 72 Q101 66 115 70" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" fill="none"/>
+    <path d="M48 88 Q90 74 138 80 Q155 83 164 76" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <rect x="36" y="102" width="40" height="8" rx="4" fill="#333"/>
+    <rect x="37" y="103" width="38" height="6" rx="3" fill="rgba(${color === '#E24B4A' ? '226,75,74' : '255,255,255'},0.3)"/>
+  </svg>`;
+}
+
+const grid = document.getElementById('productGrid');
+products.forEach(p => {
+  const card = document.createElement('div');
+  card.className = 'product-card';
+  card.innerHTML = `
+    <div class="product-thumb">
+      ${shoeIcon(p.color)}
+      <div class="product-badge">${p.badge}</div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">${p.brand}</div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-footer">
+        <div class="product-price">
+          ${p.original ? `<sub>₹${p.original}</sub>` : ''}₹${p.price.toLocaleString('en-IN')}
+        </div>
+        <button class="add-btn" onclick="addToCart('${p.name}')">+</button>
+      </div>
+    </div>`;
+  grid.appendChild(card);
+});
+
+let cartCount = 0;
+function addToCart(name) {
+  cartCount++;
+  document.querySelector('.nav-cart').textContent = `🛒 Cart (${cartCount})`;
+}
+</script>
+</body>
+</html>

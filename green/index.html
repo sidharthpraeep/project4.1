@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sidharth Shoe Store</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #0d0d0d;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(90deg, #ff0000, #111);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      color: #fff;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff0000;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: radial-gradient(circle, #1a1a1a, #000);
+    }
+
+    .hero h2 {
+      font-size: 42px;
+      color: #ff0000;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: #ccc;
+      font-size: 18px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: #ff0000;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #cc0000;
+    }
+
+    .products {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .products h2 {
+      color: #ff0000;
+      margin-bottom: 30px;
+      font-size: 32px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      background: #111;
+      border: 1px solid #ff0000;
+      padding: 20px;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #ff0000;
+    }
+
+    .card h3 {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #000;
+      border-top: 1px solid #ff0000;
+      color: #777;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Sidharth Shoe Store</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">Offers</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Step Into Style</h2>
+    <p>Premium shoes for every occasion at the best prices.</p>
+    <button class="btn">Shop Now</button>
+  </section>
+
+  <section class="products">
+    <h2>Featured Shoes</h2>
+    <div class="grid">
+
+      <div class="card">
+        <h3>Running Shoes</h3>
+        <p>Comfortable and lightweight for daily runs.</p>
+      </div>
+
+      <div class="card">
+        <h3>Casual Sneakers</h3>
+        <p>Stylish sneakers for everyday fashion.</p>
+      </div>
+
+      <div class="card">
+        <h3>Formal Shoes</h3>
+        <p>Perfect for office and special occasions.</p>
+      </div>
+
+      <div class="card">
+        <h3>Sports Shoes</h3>
+        <p>High performance shoes for athletes.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Sidharth Shoe Store. All rights reserved.
+  </footer>
+
+</body>
+</html>

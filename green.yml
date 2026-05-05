@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shoe-green
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app
+      version: green
+  template:
+    metadata:
+      labels:
+        app: app
+        version: green
+    spec:
+      containers:
+      - name: ecomshoe
+        image: sidh2004/ecomngin:v3
+        ports:
+        - containerPort: 80
+
+---
